@@ -34,3 +34,29 @@ nextButton.addEventListener('click', () => {
 
 // Initialize the first slide as the current slide
 slides[0].classList.add('current-slide');
+document.addEventListener("DOMContentLoaded", function() {
+    const text = document.getElementById('tagline-text').innerText;
+    const words = text.split(' ');
+    let wordIndex = 0;
+    let charIndex = 0;
+    const typingSpeed = 100; // Adjust typing speed here
+    const pauseBetweenWords = 300; // Pause between words
+
+    function type() {
+        if (charIndex < words[wordIndex].length) {
+            document.getElementById('tagline-text').innerHTML += words[wordIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingSpeed);
+        } else {
+            document.getElementById('tagline-text').innerHTML += ' ';
+            wordIndex++;
+            charIndex = 0;
+            if (wordIndex < words.length) {
+                setTimeout(type, pauseBetweenWords);
+            }
+        }
+    }
+
+    document.getElementById('tagline-text').innerHTML = ''; // Clear the text content
+    type();
+});
